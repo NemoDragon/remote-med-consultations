@@ -1,0 +1,40 @@
+.consultations {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 20px;
+    font-size: 25px;
+    width: 80%;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 3px;
+    background-color: white;
+}
+
+.first-visit, .control-visit, .chronic-disease, .prescription {
+    text-align: center;
+    width: 80%;
+    padding: 10px;
+    font-weight: bold;
+    border: 1px solid black;
+    border-radius: 5px;
+    margin: 10px;
+}
+
+.prescription {
+    background-color: rgb(255, 0, 200);
+}
+
+.chronic-disease {
+    background-color: rgb(132, 0, 255);
+}
+
+.control-visit {
+    background-color: rgb(0, 225, 255);
+}
+
+.first-visit {
+    background-color: rgb(100, 255, 100);
+}
+

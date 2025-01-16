@@ -1,0 +1,6 @@
+<h1>Choose a doctor</h1>
+<div class="doctor-list">
+  <div *ngFor="let doctor of doctors" class="doctor-item" [routerLink]="['/calendar', doctor.id]">
+      <h2>{{ doctor.name }}</h2>
+      <p>{{ doctor.specialization }}</p>
+  </div>

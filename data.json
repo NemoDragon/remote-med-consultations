@@ -1,0 +1,299 @@
+{
+  "doctors": [
+    {
+      "id": "1",
+      "name": "Dr. Anna Nowak",
+      "specialization": "Pediatra",
+      "schedule": {
+        "availability": [
+          {
+            "type": "cyclic",
+            "startDate": "2025-02-01",
+            "endDate": "2025-03-12",
+            "daysOfWeek": [
+              "Monday",
+              "Tuesday",
+              "Thursday",
+              "Saturday"
+            ],
+            "timeSlots": [
+              {
+                "start": "08:00",
+                "end": "12:30"
+              },
+              {
+                "start": "16:00",
+                "end": "21:30"
+              }
+            ]
+          },
+          {
+            "type": "cyclic",
+            "startDate": "2025-01-01",
+            "endDate": "2025-01-12",
+            "daysOfWeek": [
+              "Saturday",
+              "Sunday"
+            ],
+            "timeSlots": [
+              {
+                "start": "08:00",
+                "end": "12:30"
+              },
+              {
+                "start": "16:00",
+                "end": "21:30"
+              }
+            ]
+          },
+          {
+            "type": "one-time",
+            "date": "2025-02-15",
+            "timeSlots": [
+              {
+                "start": "09:00",
+                "end": "11:30"
+              }
+            ]
+          },
+          {
+            "type": "one-time",
+            "timeSlots": [
+              {
+                "start": "07:00",
+                "end": "14:00"
+              }
+            ],
+            "date": "2025-01-08"
+          },
+          {
+            "type": "cyclic",
+            "timeSlots": [
+              {
+                "start": "01:00",
+                "end": "02:00"
+              },
+              {
+                "start": "03:00",
+                "end": "05:00"
+              }
+            ],
+            "startDate": "2025-01-14",
+            "endDate": "2025-02-04",
+            "daysOfWeek": [
+              "Tuesday",
+              "Thursday"
+            ]
+          },
+          {
+            "type": "one-time",
+            "timeSlots": [
+              {
+                "start": "14:00",
+                "end": "19:00"
+              }
+            ],
+            "date": "2025-01-06"
+          }
+        ],
+        "absences": [
+          {
+            "date": "2025-01-03",
+            "reason": "Konferencja"
+          },
+          {
+            "date": "2025-01-09",
+            "reason": "a"
+          },
+          {
+            "date": "2025-02-20",
+            "reason": "Planowany urlop"
+          },
+          {
+            "date": "2025-03-01",
+            "reason": "Konferencja"
+          }
+        ]
+      },
+      "consultations": [
+        {
+          "id": 6,
+          "date": "2025-01-04",
+          "timeSlot": {
+            "start": "19:00",
+            "end": "19:30"
+          },
+          "patientId": 2,
+          "type": "control visit",
+          "state": "completed",
+          "details": "Kaszel"
+        },
+        {
+          "id": 4,
+          "date": "2025-01-05",
+          "timeSlot": {
+            "start": "14:00",
+            "end": "16:30"
+          },
+          "patientId": 2,
+          "type": "chronic disease",
+          "state": "completed",
+          "details": "Kontrola po leczeniu grypy."
+        },
+        {
+          "id": 7,
+          "date": "2025-01-06",
+          "timeSlot": {
+            "start": "21:00",
+            "end": "21:30"
+          },
+          "patientId": 2,
+          "type": "first visit",
+          "state": "completed",
+          "details": "Kaszel"
+        },
+        {
+          "id": 5,
+          "date": "2025-01-07",
+          "timeSlot": {
+            "start": "20:00",
+            "end": "21:00"
+          },
+          "patientId": 2,
+          "type": "first visit",
+          "state": "completed",
+          "details": "Kaszel"
+        },
+        {
+          "id": 8,
+          "date": "2025-01-09",
+          "timeSlot": {
+            "start": "21:00",
+            "end": "21:30"
+          },
+          "patientId": 2,
+          "type": "first visit",
+          "state": "cancelled",
+          "details": "Kaszel"
+        },
+        {
+          "id": 3,
+          "date": "2025-01-16",
+          "timeSlot": {
+            "start": "14:00",
+            "end": "16:30"
+          },
+          "patientId": 2,
+          "type": "prescription",
+          "state": "reserved",
+          "details": "Kontrola po leczeniu grypy."
+        },
+        {
+          "id": 1,
+          "date": "2025-02-05",
+          "timeSlot": {
+            "start": "09:00",
+            "end": "09:30"
+          },
+          "patientId": 1,
+          "type": "first visit",
+          "state": "reserved",
+          "details": "Pacjent skarży się na ból głowy."
+        },
+        {
+          "id": 2,
+          "date": "2025-02-10",
+          "timeSlot": {
+            "start": "10:00",
+            "end": "10:30"
+          },
+          "patientId": 2,
+          "type": "control visit",
+          "state": "reserved",
+          "details": "Kontrola po leczeniu grypy."
+        },
+        {
+          "id": 9,
+          "date": "2025-01-10",
+          "timeSlot": {
+            "start": "00:00",
+            "end": "01:00"
+          },
+          "patientId": 5,
+          "type": "first visit",
+          "state": "completed",
+          "details": "Are you feeling okay?"
+        }
+      ]
+    }
+  ],
+  "patients": [
+    {
+      "id": "1",
+      "name": "Jan Kowalski",
+      "gender": "male",
+      "age": 30,
+      "pesel": "94091612774"
+    },
+    {
+      "id": "2",
+      "name": "Ewa Nowak",
+      "gender": "female",
+      "age": 25,
+      "pesel": "99120800345"
+    },
+    {
+      "id": "3",
+      "name": "Jan Nowak",
+      "gender": "male",
+      "age": 23,
+      "pesel": "0121010708654"
+    },
+    {
+      "id": "3",
+      "name": "Jan Nowak",
+      "gender": "male",
+      "age": 23,
+      "pesel": "0121010708654"
+    },
+    {
+      "id": "5",
+      "name": "Jan Nowak",
+      "gender": "male",
+      "age": 23,
+      "pesel": "01210106854"
+    }
+  ],
+  "consultationTypes": [
+    {
+      "id": "1",
+      "name": "Pierwsza wizyta"
+    },
+    {
+      "id": "2",
+      "name": "Wizyta kontrolna"
+    },
+    {
+      "id": "3",
+      "name": "Choroba przewlekła"
+    },
+    {
+      "id": "4",
+      "name": "Recepta"
+    }
+  ],
+  "users": {
+    "userId1": {
+      "email": "user1@example.com",
+      "role": "patient"
+    },
+    "userId2": {
+      "email": "user2@example.com",
+      "role": "doctor"
+    },
+    "userId3": {
+      "email": "admin@example.com",
+      "role": "admin"
+    }
+  }
+}

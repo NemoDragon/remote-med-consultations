@@ -1,0 +1,35 @@
+<div class="absences">
+    <div class="absence-container">
+        <h2>Add absence</h2>
+        <div class="input">
+            <label for="singleDate">Absence date:</label>
+            <input
+              type="date"
+              id="singleDate"
+              [(ngModel)]="absence.date"
+              name="singleDate"
+            />
+        </div>
+        <div class="input">
+            <label for="reason">Absence reason:</label>
+            <input
+              type="text"
+              id="reason"
+              [(ngModel)]="absence.reason"
+              name="reason"
+            />
+        </div>
+        <div>
+            <button class="absence-btn" (click)="submitAbsence()">Add absence</button>
+        </div>
+        <div *ngIf="showAbsenceConflictInfo">
+            Conflict, there is an absence on the same date: {{ absence.date }}
+        </div>
+    </div>
+    <div class="all-absences">
+        <div class="absence" *ngFor="let a of absences">
+            {{formatAbsenceDate(a.date)}}
+            <button (click)="removeAbsence(a.date)" >remove</button> 
+        </div>
+    </div>
+</div>

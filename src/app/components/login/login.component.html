@@ -1,0 +1,6 @@
+<form (submit)="login(email, password)">
+    <h1>Login</h1>
+    <input type="email" [(ngModel)]="email" placeholder="Email"  [ngModelOptions]="{standalone: true}"/>
+    <input type="password" [(ngModel)]="password" placeholder="Password"  [ngModelOptions]="{standalone: true}"/>
+    <button type="submit">Login</button>
+</form>

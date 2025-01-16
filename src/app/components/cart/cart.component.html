@@ -1,0 +1,19 @@
+<div class="consultations">
+    <h2>Reserved consultations</h2>
+    <div *ngFor="let c of reservedConsultations"
+    [ngClass]="{ 
+          'first-visit': 'first visit' == c.type,
+          'control-visit': 'control visit' == c.type,
+          'chronic-disease': 'chronic disease' == c.type,
+          'prescription': 'prescription' == c.type
+        }">
+        <div class="title-id">Consultation {{ c.id }}</div>
+        <div class="type">Type: {{c.type}}</div>
+        <div class="date">Date: {{ formatDate(c.date) }}</div>
+        <div class="time-slot">
+            Time slot: {{c.timeSlot.start}} - {{ c.timeSlot.end }}
+        </div>
+        <div class="patient-info">Patient: {{ getPatientById(c.patientId).name }} [{{ getPatientById(c.patientId).gender[0] }}] {{ getPatientById(c.patientId).age }}</div>
+        <button (click)="removeConsultation(c.id)">Remove</button>
+    </div>
+</div>

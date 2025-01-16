@@ -1,0 +1,27 @@
+h1 {
+    margin-left: 20px;
+}
+
+form {
+    margin: 20px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+input {
+    margin: 10px;
+    font-size: 20px;
+    width: 300px;
+}
+
+button {
+    margin: 10px;
+    font-size: 20px;
+    padding: 10px;
+    width: 200px;   
+    background-color: rgb(169, 210, 248);
+    border: 1px solid black;
+    border-radius: 5px;
+}

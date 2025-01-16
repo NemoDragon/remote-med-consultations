@@ -1,0 +1,57 @@
+.absences {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    font-size: 20px;
+}
+
+.all-absences {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 20px;
+    width: 20%;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 3px;
+    background-color: white;
+}
+
+.absence {
+    text-align: center;
+    width: 80%;
+    padding: 10px;
+    background-color: rgb(255, 100, 100);
+    color: white;
+    font-weight: bold;
+    border: 1px solid black;
+    border-radius: 5px;
+    margin: 10px;
+}
+
+button {
+    padding: 5px;
+}
+
+.input {
+    margin: 10px;
+    font-size: 20px;
+}
+
+input {
+    margin: 16px;
+    font-size: 20px;
+}
+
+#reason {
+    width: 500px;
+}
+
+.absence-btn {
+    margin: 0px 0px 0px 250px;
+    background-color: rgb(255, 100, 100);
+    color: white;
+    font-weight: bold;
+    padding: 10px;
+}

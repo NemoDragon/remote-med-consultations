@@ -1,0 +1,86 @@
+<div class="consultation-form">
+    <h2>Book consultation</h2>
+    <div>
+        <label for="consultationDate">Consultation date:</label>
+        <input
+          type="date"
+          id="consultationDate"
+          [(ngModel)]="consultation.date"
+          name="consultationDate"
+        />
+    </div>
+    <div>
+      <label for="fromTime">From:</label>
+        <select [(ngModel)]="consultation.timeSlot.start" name="fromTime">
+          <option *ngFor="let time of timeOptions" [value]="time">{{ time }}</option>
+        </select>
+        <label for="toTime">To:</label>
+        <select [(ngModel)]="consultation.timeSlot.end" name="toTime">
+          <option *ngFor="let time of timeOptions" [value]="time">{{ time }}</option>
+        </select>
+    </div>
+    <div class="type">
+        <label for="type">Select type of consultation:</label>
+      <select [(ngModel)]="consultation.type" name="type">
+        <option>first visit</option>
+        <option>control visit</option>
+        <option>chronic disease</option>
+        <option>prescription</option>
+      </select>
+    </div>
+    <div class="firstname">
+        <label for="first">Firstname:</label>
+            <input
+              type="text"
+              id="first"
+              [(ngModel)]="firstname"
+              name="first"
+        />
+    </div>
+    <div class="surname">
+        <label for="sur">Surname:</label>
+            <input
+              type="text"
+              id="sur"
+              [(ngModel)]="surname"
+              name="sur"
+        />
+    </div>
+    <div class="gender">
+        <label for="gender">Gender:</label>
+            <input
+              type="text"
+              id="gender"
+              [(ngModel)]="patient.gender"
+              name="gender"
+        />
+    </div>
+    <div class="age">
+        <label for="age">Age:</label>
+            <input
+              type="number"
+              id="ager"
+              [(ngModel)]="patient.age"
+              name="age"
+        />
+    </div>
+    <div class="pesel">
+      <label for="pesel">Pesel:</label>
+          <input
+            type="text"
+            id="pesel"
+            [(ngModel)]="patient.pesel"
+            name="pesel"
+      />
+  </div>
+    <div class="details">
+      <label for="detail">Details for doctor:</label>
+          <input
+            type="text"
+            id="detail"
+            [(ngModel)]="consultation.details"
+            name="detail"
+      />
+  </div>
+    <button (click)="addConsultation()">Save consultation</button>
+</div>

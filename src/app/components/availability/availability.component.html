@@ -1,0 +1,101 @@
+<div class="availability-container">
+  <h2>Define availability</h2>
+
+  <!-- Wybór rodzaju dostępności -->
+  <label>
+    <input
+      type="radio"
+      name="availabilityType"
+      value="cyclic"
+      [(ngModel)]="availabilityType"
+    />
+    Cyclic availability
+  </label>
+  <label>
+    <input
+      type="radio"
+      name="availabilityType"
+      value="one-time"
+      [(ngModel)]="availabilityType"
+    />
+    One-time availability
+  </label>
+
+  <!-- Formularz dla dostępności cyklicznej -->
+  <div *ngIf="availabilityType === 'cyclic'" class="cyclic-availability-form">
+    <h3>Cyclic availability options</h3>
+    <div>
+      <label for="startDate">Start date:</label>
+      <input
+        type="date"
+        id="startDate"
+        [(ngModel)]="availabilityStartDate"
+        name="startDate"
+      />
+    </div>
+    <div>
+      <label for="endDate">End date:</label>
+      <input
+        type="date"
+        id="endDate"
+        [(ngModel)]="availabilityEndDate"
+        name="endDate"
+      />
+    </div>
+    <div>
+      <h4>Choose days and hours:</h4>
+      <div *ngFor="let day of dayNames; let i = index">
+        <label>
+          <input
+            type="checkbox"
+            [value]="day"
+            (change)="toggleDaySelection(day, $event)"
+          />
+          {{ day }}
+        </label>
+      </div>
+      <h4>Add time interval:</h4>
+      <div *ngFor="let timeSlot of availabilityTimeSlots; let i = index">
+        <label for="fromTime">From:</label>
+        <select [(ngModel)]="timeSlot.start" name="fromTime-{{ i }}">
+          <option *ngFor="let time of timeOptions" [value]="time">{{ time }}</option>
+        </select>
+        <label for="toTime">To:</label>
+        <select [(ngModel)]="timeSlot.end" name="toTime-{{ i }}">
+          <option *ngFor="let time of timeOptions" [value]="time">{{ time }}</option>
+        </select>
+        <button (click)="removeTimeSlot(i)">Remove</button>
+      </div>
+      <button (click)="addTimeSlot()">Add time interval</button>
+    </div>
+    <button (click)="submitCyclicAvailability()">Save cyclic availability</button>
+  </div>
+
+  <!-- Formularz dla dostępności jednorazowej -->
+  <div *ngIf="availabilityType === 'one-time'" class="single-availability-form">
+    <h3>One-time availability options</h3>
+    <div>
+      <label for="singleDate">Date:</label>
+      <input
+        type="date"
+        id="singleDate"
+        [(ngModel)]="availabilityDate"
+        name="singleDate"
+      />
+    </div>
+    <h4>Add time interval:</h4>
+    <div *ngFor="let timeSlot of availabilityTimeSlots; let i = index">
+      <label for="fromTime">From:</label>
+      <select [(ngModel)]="timeSlot.start" name="fromTime-{{ i }}">
+        <option *ngFor="let time of timeOptions" [value]="time">{{ time }}</option>
+      </select>
+      <label for="toTime">To:</label>
+      <select [(ngModel)]="timeSlot.end" name="toTime-{{ i }}">
+        <option *ngFor="let time of timeOptions" [value]="time">{{ time }}</option>
+      </select>
+      <button (click)="removeTimeSlot(i)">Remove</button>
+    </div>
+    <button (click)="addTimeSlot()">Add time interval</button>
+    <button (click)="submitSingleAvailability()">Save one-time availability</button>
+  </div>
+</div>

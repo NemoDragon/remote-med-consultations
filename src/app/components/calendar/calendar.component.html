@@ -1,0 +1,61 @@
+<div class="calendar-header">
+    <button (click)="previousWeek()">← Previous week</button>
+    <span>{{ currentWeek[0] | date: 'dd.MM.yyyy' }} - {{ currentWeek[6] | date: 'dd.MM.yyyy' }}</span>
+    <button (click)="nextWeek()">Next week →</button>
+</div>
+<div class="calendar">
+  <table>
+    <thead>
+      <tr class="header">
+        <th>Hour</th>
+        <th *ngFor="let day of currentWeek"
+        [ngClass]="{ 'today-day': currentDate.toLocaleDateString('en-CA') == day.toLocaleDateString('en-CA'), 
+        'absence-day': absenceDates.includes(day.toLocaleDateString('en-CA'))}" >
+            <div class="week-day"> {{day.toDateString().slice(0, 4) }}</div>
+            <div class="month-day"> {{day.toDateString().slice(4, 10) }}</div>
+            <div class="count-con" *ngIf="!absenceDates.includes(day.toLocaleDateString('en-CA'))"> Consultations: <span class="num">{{countConsultations(day) }}</span></div>
+            <div *ngIf="absenceDates.includes(day.toLocaleDateString('en-CA'))">Absence</div>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let time of timeSlots; let i=index">
+        <td [ngClass]="{ 'time': checkTime(timeSlots[i], timeSlots[(i + 1) % timeSlots.length], currentDate)}" >{{ timeSlots[i] }} -  {{ timeSlots[(i + 1) % timeSlots.length] }}</td>
+        <td
+          *ngFor="let day of currentWeek"
+          [ngClass]="{ 'today': currentDate.toLocaleDateString('en-CA') == day.toLocaleDateString('en-CA'), 
+          'absence': absenceDates.includes(day.toLocaleDateString('en-CA')), 
+          'past': currentDate.toLocaleDateString('en-CA') > day.toLocaleDateString('en-CA'), 
+          'time': checkTime(timeSlots[i], timeSlots[(i + 1) % timeSlots.length], day),
+          'consultation': isConsultation(timeSlots[i], timeSlots[(i + 1) % timeSlots.length], day),
+          'availability': isAvailability(timeSlots[i], timeSlots[(i + 1) % timeSlots.length], day),
+          'consultation-past': isConsultationPast(timeSlots[i], timeSlots[(i + 1) % timeSlots.length], day),
+          'first-visit': 'first visit' == getConsultationType(timeSlots[i], timeSlots[(i + 1) % timeSlots.length], day),
+          'control-visit': 'control visit' == getConsultationType(timeSlots[i], timeSlots[(i + 1) % timeSlots.length], day),
+          'chronic-disease': 'chronic disease' == getConsultationType(timeSlots[i], timeSlots[(i + 1) % timeSlots.length], day),
+          'prescription': 'prescription' == getConsultationType(timeSlots[i], timeSlots[(i + 1) % timeSlots.length], day),
+          'cancelled': 'cancelled' == getConsultationState(timeSlots[i], timeSlots[(i + 1) % timeSlots.length], day)
+        }"
+        >
+        <div 
+          *ngIf="isConsultation(timeSlots[i], timeSlots[(i + 1) % timeSlots.length], day)"
+          (mouseenter)="showConsultationDetails(timeSlots[i], timeSlots[(i + 1) % timeSlots.length], day)"
+          (mouseleave)="hideConsultationDetails()"
+        >
+          <div *ngIf="hoveredConsultation && hoveredConsultation.date === day.toLocaleDateString('en-CA') 
+                      && hoveredConsultation.timeSlot.start === timeSlots[i]">
+            <p>consultation {{ hoveredConsultation.id }}</p>
+            <p>Type: {{ hoveredConsultation.type }}</p>
+            <p>State: {{ hoveredConsultation.state }}</p>
+            <p>Details: {{ hoveredConsultation.details }}</p>
+          </div>
+          <div *ngIf="!hoveredConsultation || hoveredConsultation.date !== day.toLocaleDateString('en-CA') 
+                      || hoveredConsultation.timeSlot.start !== timeSlots[i]">
+            Consultation info
+          </div>
+        </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
