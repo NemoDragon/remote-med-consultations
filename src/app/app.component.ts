@@ -16,6 +16,7 @@ export class AppComponent {
   options = ['json', 'firebase', 'server'];
   isLoggedIn = false;
   username: string | null = null;
+  userRole: string | null = null;
 
   constructor(
     private datasourceService: DatasourceService,
@@ -24,7 +25,10 @@ export class AppComponent {
   ) {
     this.authService.currentUser$.subscribe((user) => {
       this.isLoggedIn = !!user;
-      this.username = user?.email?.slice(0, user.email.length - 12) || null;
+      this.username = user?.email?.split('@')[0] || null;
+      this.authService.getUserRole(user?.uid || '').then((role) => {
+        this.userRole = role;
+      });
     });
   }
 

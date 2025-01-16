@@ -1,7 +1,7 @@
 {
   "doctors": [
     {
-      "id": "1",
+      "id": "0",
       "name": "Dr. Anna Nowak",
       "specialization": "Pediatra",
       "schedule": {
@@ -29,8 +29,8 @@
           },
           {
             "type": "cyclic",
-            "startDate": "2025-01-01",
-            "endDate": "2025-01-12",
+            "startDate": "2025-01-16",
+            "endDate": "2025-01-30",
             "daysOfWeek": [
               "Saturday",
               "Sunday"
@@ -53,6 +53,16 @@
               {
                 "start": "09:00",
                 "end": "11:30"
+              }
+            ]
+          },
+          {
+            "type": "one-time",
+            "date": "2025-01-17",
+            "timeSlots": [
+              {
+                "start": "16:00",
+                "end": "23:30"
               }
             ]
           },
@@ -177,6 +187,18 @@
           "details": "Kaszel"
         },
         {
+          "id": 9,
+          "date": "2025-01-10",
+          "timeSlot": {
+            "start": "00:00",
+            "end": "01:00"
+          },
+          "patientId": 5,
+          "type": "first visit",
+          "state": "completed",
+          "details": "Are you feeling okay?"
+        },
+        {
           "id": 3,
           "date": "2025-01-16",
           "timeSlot": {
@@ -186,7 +208,31 @@
           "patientId": 2,
           "type": "prescription",
           "state": "reserved",
-          "details": "Kontrola po leczeniu grypy."
+          "details": "Wystawienie recpety."
+        },
+        {
+          "id": 10,
+          "date": "2025-01-18",
+          "timeSlot": {
+            "start": "09:00",
+            "end": "09:30"
+          },
+          "patientId": 1,
+          "type": "first visit",
+          "state": "reserved",
+          "details": "Me choosing the wrong answer on the exam be like :)"
+        },
+        {
+          "id": 11,
+          "date": "2025-01-18",
+          "timeSlot": {
+            "start": "19:00",
+            "end": "19:30"
+          },
+          "patientId": 1,
+          "type": "control visit",
+          "state": "reserved",
+          "details": "O! Let's goooo!!!"
         },
         {
           "id": 1,
@@ -210,19 +256,126 @@
           "patientId": 2,
           "type": "control visit",
           "state": "reserved",
-          "details": "Kontrola po leczeniu grypy."
+          "details": "Kontrola po leczeniu kataru."
+        }
+      ]
+    },
+    {
+      "id": "1",
+      "name": "Dr. Ewa Kowalska",
+      "specialization": "Dermatolog",
+      "schedule": {
+        "availability": [
+          {
+            "type": "cyclic",
+            "startDate": "2025-01-01",
+            "endDate": "2025-04-12",
+            "daysOfWeek": [
+              "Monday",
+              "Friday"
+            ],
+            "timeSlots": [
+              {
+                "start": "08:00",
+                "end": "15:30"
+              }
+            ]
+          },
+          {
+            "type": "cyclic",
+            "startDate": "2025-01-16",
+            "endDate": "2025-01-30",
+            "daysOfWeek": [
+              "Thursday",
+              "Wednesday"
+            ],
+            "timeSlots": [
+              {
+                "start": "06:00",
+                "end": "07:30"
+              },
+              {
+                "start": "17:00",
+                "end": "19:30"
+              }
+            ]
+          },
+          {
+            "type": "one-time",
+            "date": "2025-02-01",
+            "timeSlots": [
+              {
+                "start": "09:00",
+                "end": "18:30"
+              }
+            ]
+          },
+          {
+            "type": "one-time",
+            "timeSlots": [
+              {
+                "start": "05:30",
+                "end": "07:00"
+              }
+            ],
+            "date": "2025-01-19"
+          }
+        ],
+        "absences": [
+          {
+            "date": "2025-01-18",
+            "reason": "Wyjazd, brak możliwości pracy"
+          }
+        ]
+      },
+      "consultations": [
+        {
+          "id": 1,
+          "date": "2025-01-17",
+          "timeSlot": {
+            "start": "19:00",
+            "end": "19:30"
+          },
+          "patientId": 3,
+          "type": "first visit",
+          "state": "reserved",
+          "details": "Dziwne plamy na skórze"
         },
         {
-          "id": 9,
-          "date": "2025-01-10",
+          "id": 2,
+          "date": "2025-01-17",
           "timeSlot": {
-            "start": "00:00",
-            "end": "01:00"
+            "start": "19:30",
+            "end": "20:00"
           },
-          "patientId": 5,
-          "type": "first visit",
-          "state": "completed",
-          "details": "Are you feeling okay?"
+          "patientId": 2,
+          "type": "control visit",
+          "state": "reserved",
+          "details": "Trądzik - kontrola"
+        },
+        {
+          "id": 3,
+          "date": "2025-01-17",
+          "timeSlot": {
+            "start": "20:00",
+            "end": "20:30"
+          },
+          "patientId": 1,
+          "type": "prescription",
+          "state": "reserved",
+          "details": "Wystawienie recpety."
+        },
+        {
+          "id": 4,
+          "date": "2025-01-17",
+          "timeSlot": {
+            "start": "20:30",
+            "end": "21:30"
+          },
+          "patientId": 1,
+          "type": "chronic disease",
+          "state": "reserved",
+          "details": "leczenie grzybicy"
         }
       ]
     }
@@ -250,18 +403,39 @@
       "pesel": "0121010708654"
     },
     {
-      "id": "3",
+      "id": "4",
       "name": "Jan Nowak",
       "gender": "male",
-      "age": 23,
+      "age": 43,
       "pesel": "0121010708654"
     },
     {
       "id": "5",
-      "name": "Jan Nowak",
+      "name": "Jan Jan",
       "gender": "male",
-      "age": 23,
-      "pesel": "01210106854"
+      "age": 20,
+      "pesel": "03210106854"
+    },
+    {
+      "id": 6,
+      "name": "Arr Err",
+      "gender": "m",
+      "age": 29,
+      "pesel": "92020201876"
+    },
+    {
+      "id": 7,
+      "name": "Arr Err",
+      "gender": "m",
+      "age": 29,
+      "pesel": "11111"
+    },
+    {
+      "id": 8,
+      "name": "Arr Err",
+      "gender": "m",
+      "age": 29,
+      "pesel": "21221"
     }
   ],
   "consultationTypes": [

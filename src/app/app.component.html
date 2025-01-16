@@ -2,25 +2,21 @@
   <div class="nav-item">
     <a routerLink="/" routerLinkActive="active">Calendar</a>
   </div>
-  <div class="nav-item">
+ 
+  <div class="nav-item" *ngIf="isLoggedIn && (username === 'doct0' || username === 'doct1')">
     <a routerLink="/availability" routerLinkActive="active">Define availability</a>
   </div>
-  <div class="nav-item">
+  <div class="nav-item" *ngIf="isLoggedIn && (username === 'doct0' || username === 'doct1')">
     <a routerLink="/absence" routerLinkActive="active">Add absence</a>
   </div>
-  <div class="nav-item">
-    <a routerLink="/booking" routerLinkActive="active">Book consultation</a>
-  </div>
-  <div class="nav-item">
-    <a routerLink="/cart" routerLinkActive="active">List of consultations</a>
-  </div>
-  <div class="datasource-item">
+  <div class="blank-item"></div>
+  <div class="datasource-item" *ngIf="isLoggedIn && username === 'admin'">
     <label for="data-source">Choose data source:</label>
     <select id="data-source" (change)="onSelectChange($event)">
       <option *ngFor="let option of options" [value]="option">{{ option }}</option>
     </select>
   </div>
-  <div class="persistence-selector">
+  <div class="persistence-selector" *ngIf="isLoggedIn && username === 'admin'">
     <label for="persistence-mode">Choose persistence mode:</label>
     <select id="persistence-mode" (change)="onPersistenceChange($event)">
       <option value="local">Local (default)</option>

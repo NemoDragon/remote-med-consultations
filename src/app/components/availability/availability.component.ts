@@ -5,6 +5,7 @@ import { ApiService } from '../../services/api.service';
 import { Availability, Doctor, TimeSlot } from '../../models/doctor.model';
 import { FirebaseService } from '../../services/firebase.service';
 import { DatasourceService } from '../../services/datasource.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-availability',
@@ -14,6 +15,7 @@ import { DatasourceService } from '../../services/datasource.service';
   styleUrl: './availability.component.css',
 })
 export class AvailabilityComponent implements OnInit {
+  doctorId: string = '0';
   selectedSource!: string;
   availabilityType: string = '';
   availabilityDate: string = '';
@@ -43,11 +45,15 @@ export class AvailabilityComponent implements OnInit {
   constructor(
     private apiService: ApiService,
     private firebaseService: FirebaseService,
-    private dataSourceService: DatasourceService
+    private dataSourceService: DatasourceService,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
     this.dataSourceService.dataSource$.subscribe((value) => {
+      this.authService.currentUser$.subscribe((user) => {
+        this.doctorId = user?.email?.slice(4, 5) || '0';
+      });
       this.selectedSource = value;
       this.loadData();
     });
@@ -58,20 +64,22 @@ export class AvailabilityComponent implements OnInit {
   loadData() {
     if (this.selectedSource === 'firebase') {
       this.firebaseService.getData('doctors').subscribe((data) => {
-        this.doctor = data[0];
+        this.doctor = data[Number(this.doctorId)];
       });
       this.firebaseService
-        .getData('doctors/0/schedule/availability')
+        .getData(`doctors/${this.doctorId}/schedule/availability`)
         .subscribe((data) => {
           this.availabilities = data;
         });
     } else {
       this.apiService.getDoctors().subscribe((doctors) => {
-        this.doctor = doctors[0];
+        this.doctor = doctors[Number(this.doctorId)];
       });
-      this.apiService.getAvailabilities(1).subscribe((data) => {
-        this.availabilities = data;
-      });
+      this.apiService
+        .getAvailabilities(Number(this.doctorId))
+        .subscribe((data) => {
+          this.availabilities = data;
+        });
     }
   }
 
@@ -124,9 +132,9 @@ export class AvailabilityComponent implements OnInit {
     this.availabilities.push(this.availability);
     this.doctor.schedule.availability = this.availabilities;
     if (this.selectedSource == 'firebase') {
-      this.firebaseService.updateData('doctors/0', this.doctor);
+      this.firebaseService.updateData(`doctors/${this.doctor.id}`, this.doctor);
     } else {
-      this.apiService.updateDoctor(1, this.doctor).subscribe();
+      this.apiService.updateDoctor(this.doctor.id, this.doctor).subscribe();
     }
   }
 
@@ -138,9 +146,9 @@ export class AvailabilityComponent implements OnInit {
     this.availabilities.push(this.availability);
     this.doctor.schedule.availability = this.availabilities;
     if (this.selectedSource == 'firebase') {
-      this.firebaseService.updateData('doctors/0', this.doctor);
+      this.firebaseService.updateData(`doctors/${this.doctor.id}`, this.doctor);
     } else {
-      this.apiService.updateDoctor(1, this.doctor).subscribe();
+      this.apiService.updateDoctor(this.doctor.id, this.doctor).subscribe();
     }
   }
 }

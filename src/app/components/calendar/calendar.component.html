@@ -2,6 +2,7 @@
     <button (click)="previousWeek()">← Previous week</button>
     <span>{{ currentWeek[0] | date: 'dd.MM.yyyy' }} - {{ currentWeek[6] | date: 'dd.MM.yyyy' }}</span>
     <button (click)="nextWeek()">Next week →</button>
+    <h2> {{ doctor.name }} calendar </h2>
 </div>
 <div class="calendar">
   <table>

@@ -6,11 +6,12 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { FirebaseService } from '../../services/firebase.service';
 import { DatasourceService } from '../../services/datasource.service';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-booking',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './booking.component.html',
   styleUrl: './booking.component.css',
 })
@@ -41,29 +42,31 @@ export class BookingComponent implements OnInit {
   constructor(
     private apiService: ApiService,
     private firebaseService: FirebaseService,
-    private dataSourceService: DatasourceService
+    private dataSourceService: DatasourceService,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
+    let doctorId = this.route.snapshot.paramMap.get('id') || '0';
     this.dataSourceService.dataSource$.subscribe((value) => {
       this.selectedSource = value;
-      this.loadData();
+      this.loadData(doctorId);
     });
 
     this.generateTimeOptions();
   }
 
-  loadData() {
+  loadData(id: string) {
     if (this.selectedSource === 'firebase') {
       this.firebaseService.getData('doctors').subscribe((data) => {
-        this.doctor = data[0];
+        this.doctor = data[Number(id)];
       });
       this.firebaseService.getData('patients').subscribe((data) => {
         this.patients = data;
       });
     } else {
       this.apiService.getDoctors().subscribe((data) => {
-        this.doctor = data[0];
+        this.doctor = data[Number(id)];
       });
       this.apiService.getPatients().subscribe((data) => {
         this.patients = data;
@@ -92,6 +95,13 @@ export class BookingComponent implements OnInit {
   addConsultation() {
     this.consultation.state = 'reserved';
     this.consultation.id = this.doctor.consultations.length + 1;
+    while (
+      Array(this.doctor.consultations)
+        .map((x) => x.id)
+        .includes(this.consultation.id)
+    ) {
+      this.consultation.id += 1;
+    }
     this.patient.name = this.firstname + ' ' + this.surname;
     const pesel = this.patient.pesel;
     this.patient.id = this.patients.length + 1;
@@ -116,9 +126,9 @@ export class BookingComponent implements OnInit {
     this.doctor.consultations.push(this.consultation);
 
     if (this.selectedSource == 'firebase') {
-      this.firebaseService.updateData('doctors/0', this.doctor);
+      this.firebaseService.updateData(`doctors/${this.doctor.id}`, this.doctor);
     } else {
-      this.apiService.updateDoctor(1, this.doctor).subscribe();
+      this.apiService.updateDoctor(this.doctor.id, this.doctor).subscribe();
     }
   }
 }

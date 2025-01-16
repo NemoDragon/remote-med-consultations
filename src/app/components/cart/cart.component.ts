@@ -5,6 +5,7 @@ import { Consultation } from '../../models/doctor.model';
 import { Patient } from '../../models/patient.model';
 import { FirebaseService } from '../../services/firebase.service';
 import { DatasourceService } from '../../services/datasource.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-cart',
@@ -23,23 +24,25 @@ export class CartComponent implements OnInit {
   constructor(
     private apiService: ApiService,
     private firebaseService: FirebaseService,
-    private dataSourceService: DatasourceService
+    private dataSourceService: DatasourceService,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
+    let doctorId = this.route.snapshot.paramMap.get('id') || '0';
     this.dataSourceService.dataSource$.subscribe((value) => {
       this.selectedSource = value;
-      this.loadData();
+      this.loadData(doctorId);
     });
   }
 
-  loadData() {
+  loadData(id: string) {
     if (this.selectedSource === 'firebase') {
       this.firebaseService.getData('doctors').subscribe((data) => {
-        this.doctor = data[0];
+        this.doctor = data[Number(id)];
       });
       this.firebaseService
-        .getData('doctors/0/consultations')
+        .getData(`doctors/${id}/consultations`)
         .subscribe((data) => {
           this.consultations = data;
           this.reservedConsultations = this.consultations.filter(
@@ -55,9 +58,9 @@ export class CartComponent implements OnInit {
       });
     } else {
       this.apiService.getDoctors().subscribe((data) => {
-        this.doctor = data[0];
+        this.doctor = data[Number(id)];
       });
-      this.apiService.getConsultations(1).subscribe((data) => {
+      this.apiService.getConsultations(Number(id)).subscribe((data) => {
         this.consultations = data;
         this.reservedConsultations = this.consultations.filter(
           (x) => x.state == 'reserved'
@@ -87,9 +90,10 @@ export class CartComponent implements OnInit {
     );
     this.doctor.consultations = newConsultations;
     if (this.selectedSource == 'firebase') {
-      this.firebaseService.updateData('doctors/0', this.doctor);
+      this.firebaseService.updateData(`doctors/${this.doctor.id}`, this.doctor);
     } else {
-      this.apiService.updateDoctor(1, this.doctor).subscribe();
+      this.apiService.updateDoctor(this.doctor.id, this.doctor).subscribe();
     }
+    this.loadData(this.doctor.id);
   }
 }

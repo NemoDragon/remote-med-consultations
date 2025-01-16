@@ -1,6 +1,9 @@
 <h1>Choose a doctor</h1>
 <div class="doctor-list">
-  <div *ngFor="let doctor of doctors" class="doctor-item" [routerLink]="['/calendar', doctor.id]">
+  <div *ngFor="let doctor of doctors" class="doctor-item">
       <h2>{{ doctor.name }}</h2>
       <p>{{ doctor.specialization }}</p>
+      <button [routerLink]="['/calendar', doctor.id]">Check calendar</button>
+      <button [routerLink]="['/booking', doctor.id]">Book consultation</button>
+      <button [routerLink]="['/cart', doctor.id]">List of consultations</button>
   </div>

@@ -14,7 +14,7 @@ import { DoctorListComponent } from './components/doctor-list/doctor-list.compon
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'calendar',
+    redirectTo: 'doctor-list',
     pathMatch: 'full',
   },
   { path: 'absence', component: AbsenceComponent, canActivate: [AuthGuard] },
@@ -23,9 +23,12 @@ export const routes: Routes = [
     component: AvailabilityComponent,
     canActivate: [AuthGuard],
   },
-  { path: 'booking', component: BookingComponent, canActivate: [AuthGuard] },
-  { path: 'cart', component: CartComponent, canActivate: [AuthGuard] },
-  { path: 'calendar', component: CalendarComponent, canActivate: [AuthGuard] },
+  {
+    path: 'booking/:id',
+    component: BookingComponent,
+    canActivate: [AuthGuard],
+  },
+  { path: 'cart/:id', component: CartComponent, canActivate: [AuthGuard] },
   {
     path: 'calendar/:id',
     component: CalendarComponent,

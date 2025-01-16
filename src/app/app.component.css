@@ -9,10 +9,21 @@ nav {
     flex-direction: row;
 }
 
+.blank-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 60%;
+    border: 1px solid black;
+    background-color: rgb(169, 210, 248);
+    padding: 20px;
+}
+
 .nav-item {
     display: flex;
     flex-direction: row;
     justify-content: center;
+    align-items: center;
     width: 20%;
     border: 1px solid black;
     background-color: rgb(169, 210, 248);
@@ -33,6 +44,7 @@ nav {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     width: 20%;
     border: 1px solid black;
     background-color: rgb(169, 210, 248);
@@ -47,4 +59,9 @@ nav {
     border: 1px solid black;
     background-color: rgb(169, 210, 248);
     padding: 20px;
+}
+button {
+    margin: 10px 0px 10px 0px;
+    width: fit-content;
+    font-size: 15px;
 }
